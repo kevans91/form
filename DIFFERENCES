@@ -1,0 +1,12 @@
+Differences between this fork and the original:
+	* Encodes form elements that have multiple values in a way that doesn't
+		screw up certain query string parsers (PHP to name one) when multiple
+		values are specified with the same key and no brackets to indicate an
+		array
+
+	* formToArray sets data on the DOM element (param-name.jquery-form) to indicate
+		what parameter name that element actually took on. This was intended
+		to make searching for elements in pre-submit work better in the case
+		of the previous change where the name is slightly altered in formToArray
+		to not mess up some query string parsers.
+
