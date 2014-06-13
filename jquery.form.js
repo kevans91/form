@@ -988,8 +988,11 @@ $.fn.formToArray = function(semantic, elements) {
             if (elements) {
                 elements.push(el);
             }
+
+			n += '[]';
+
             for(j=0, jmax=v.length; j < jmax; j++) {
-                a.push({name: n + '[]', value: v[j]});
+                a.push({name: n, value: v[j]});
             }
         }
         else if (feature.fileapi && el.type == 'file') {
@@ -998,8 +1001,10 @@ $.fn.formToArray = function(semantic, elements) {
             }
             var files = el.files;
             if (files.length) {
+				n += '[]';
+
                 for (j=0; j < files.length; j++) {
-                    a.push({name: n + '[]', value: files[j], type: el.type});
+                    a.push({name: n, value: files[j], type: el.type});
                 }
             }
             else {
@@ -1013,6 +1018,8 @@ $.fn.formToArray = function(semantic, elements) {
             }
             a.push({name: n, value: v, type: el.type, required: el.required});
         }
+
+		$(el).data("param-name.jquery-form", n);
     }
 
     if (!semantic && form.clk) {
